@@ -6,7 +6,6 @@ from pygame import mixer
 
 # Section Popup
 def win2m():
-       
     lay2 = [[pg.T(f'', key='T')], [pg.OK()]]
     win2 = pg.Window('Popup', lay2, location=(250 ,0), no_titlebar=True)
     return win2
@@ -17,27 +16,25 @@ def sound():
     mixer.music.set_volume(0.7)
     mixer.music.play()
 
-
 def main():
     # Color thingy
     pg.theme('dark amber')
 
     # Main Window
-    layout = [[pg.Text('Timer = 0', key='timer', visible = False), pg.DropDown([(0.05, 0.05), (25, 5), (15, 2)], key='drop', )],
-              [pg.B('CLOSE'), pg.B('START')]]
+    layout = [
+           [pg.Text('Timer = 0', key='timer', visible = False), pg.DropDown([(0.05, 0.05), (25, 5), (15, 2)], key='drop', )],
+           [pg.B('CLOSE'), pg.B('START')]
+    ]
     win = pg.Window('Pomodoro', layout, location=(0,0), finalize=True, no_titlebar=True)
-    
-
+   
     while True:
         # Reads for events and values
         e, v = win.read()
-
 
         # Closes the program
         if e == pg.WINDOW_CLOSED or e == 'CLOSE':
             win.close()
             sys.exit()
-        
         
         # Starts the counter upon pressing START
         if e == 'START':
@@ -57,7 +54,6 @@ def main():
                 M = M + 0.00
                 win['timer'].update(M)
                 win.refresh()
-            
             
             # Popup window to indicateb break time
             sound()
@@ -101,5 +97,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-main()
